@@ -1,4 +1,3 @@
-
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/AppSidebar"
 import { DashboardHeader } from "@/components/DashboardHeader"
@@ -7,6 +6,7 @@ import { DashboardLineChart } from "@/components/LineChart"
 import { FunnelChart } from "@/components/FunnelChart"
 import { DonutChart } from "@/components/DonutChart"
 import { TrendingUp, DollarSign, Target, Eye, Users, BarChart3 } from "lucide-react"
+import { VideoFunnelChart } from "@/components/VideoFunnelChart"
 
 const Index = () => {
   return (
@@ -79,29 +79,41 @@ const Index = () => {
               />
             </div>
 
-            {/* Charts Section */}
+            {/* Charts Section - Linha do Tempo */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <DashboardLineChart />
-              <FunnelChart />
             </div>
 
-            {/* Bottom Section */}
+            {/* Charts Section - Funis e Demográficos */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <FunnelChart />
+              <DonutChart />
+            </div>
+
+            {/* Bottom Section - Funil de Vídeo e Visão Geral */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <VideoFunnelChart />
+              
               <div className="bg-card border border-border rounded-lg p-6">
-                <h3 className="text-lg font-semibold mb-4">Visão Geral</h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Campanha</span>
-                    <span>Leads</span>
+                <h3 className="text-lg font-semibold mb-4 text-primary flex items-center gap-3">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  Visão Geral
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center p-3 bg-muted/20 rounded-lg">
+                    <span className="text-muted-foreground">Campanhas Ativas</span>
+                    <span className="font-bold text-primary">3</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Impressões</span>
-                    <span>Leads</span>
+                  <div className="flex justify-between items-center p-3 bg-muted/20 rounded-lg">
+                    <span className="text-muted-foreground">Impressões Totais</span>
+                    <span className="font-bold">{(50676).toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between items-center p-3 bg-muted/20 rounded-lg">
+                    <span className="text-muted-foreground">Taxa de Conversão Geral</span>
+                    <span className="font-bold text-primary">0,34%</span>
                   </div>
                 </div>
               </div>
-              
-              <DonutChart />
             </div>
           </div>
         </main>
