@@ -49,16 +49,16 @@ export function FunnelChart() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <Card className="gradient-card border-border/50 overflow-hidden">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-primary text-xl flex items-center gap-3">
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+    <Card className="gradient-card card-hover border-border/50 overflow-hidden">
+      <CardHeader className="pb-6 px-8 pt-8">
+        <CardTitle className="text-hierarchy-primary text-xl flex items-center gap-3">
+          <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
           Funil Geral
         </CardTitle>
-        <p className="text-sm text-muted-foreground/80 font-medium">Análise de Conversão</p>
+        <p className="text-sm text-hierarchy-secondary font-medium mt-2">Análise de Conversão</p>
       </CardHeader>
-      <CardContent className="space-y-4 px-6 pb-6">
-        <div className="space-y-6">
+      <CardContent className="space-y-6 px-8 pb-8">
+        <div className="space-y-8">
           {funnelData.map((item, index) => (
             <div key={index} className="relative">
               {/* Etapa do Funil */}
@@ -68,26 +68,26 @@ export function FunnelChart() {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div 
-                  className="relative overflow-hidden rounded-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl"
+                  className="relative overflow-hidden rounded-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:shadow-xl"
                   style={{ 
-                    width: `${Math.max(item.percentage, 25)}%`,
-                    minWidth: '200px',
+                    width: `${Math.max(item.percentage, 30)}%`,
+                    minWidth: '280px',
                     background: `linear-gradient(135deg, 
-                      hsl(${14 + index * 5} 100% ${57 - index * 8}%) 0%, 
-                      hsl(${14 + index * 5} 100% ${47 - index * 8}%) 100%)`
+                      hsl(${20 + index * 8} 100% ${60 - index * 6}%) 0%, 
+                      hsl(${20 + index * 8} 100% ${50 - index * 6}%) 100%)`
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  <div className="relative z-10 p-4 text-white">
+                  <div className="relative z-10 p-6 text-white">
                     <div className="flex items-center justify-between">
-                      <div>
+                      <div className="space-y-1">
                         <div className="font-bold text-lg">{item.label}</div>
-                        <div className="text-sm opacity-90">{item.type}</div>
+                        <div className="text-sm opacity-90 font-medium">{item.type}</div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right space-y-1">
                         <div className="font-bold text-xl">{item.value.toLocaleString()}</div>
-                        <div className="text-sm opacity-90">{item.cost}</div>
+                        <div className="text-sm opacity-90 font-medium">{item.cost}</div>
                       </div>
                     </div>
                   </div>
@@ -95,23 +95,23 @@ export function FunnelChart() {
 
                 {/* Tooltip */}
                 {hoveredIndex === index && (
-                  <div className="absolute top-full left-4 mt-2 bg-card border border-border rounded-lg p-4 shadow-lg z-20 min-w-[250px]">
-                    <div className="space-y-2">
-                      <p className="font-semibold text-foreground">{item.label}</p>
-                      <div className="space-y-1 text-sm">
+                  <div className="absolute top-full left-4 mt-4 bg-card/95 backdrop-blur-sm border border-border rounded-xl p-5 shadow-2xl z-20 min-w-[300px]">
+                    <div className="space-y-3">
+                      <p className="font-semibold text-hierarchy-primary text-lg">{item.label}</p>
+                      <div className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Valor Absoluto:</span>
-                          <span className="font-medium">{item.value.toLocaleString()}</span>
+                          <span className="text-hierarchy-secondary">Valor Absoluto:</span>
+                          <span className="font-semibold text-foreground">{item.value.toLocaleString()}</span>
                         </div>
                         {index > 0 && item.nextConversion && (
                           <div className="flex justify-between">
-                            <span className="text-muted-foreground">Taxa de Conversão:</span>
-                            <span className="font-medium text-primary">{funnelData[index].nextConversion}</span>
+                            <span className="text-hierarchy-secondary">Taxa de Conversão:</span>
+                            <span className="font-semibold text-primary">{funnelData[index].nextConversion}</span>
                           </div>
                         )}
                         <div className="flex justify-between">
-                          <span className="text-muted-foreground">Custo Acumulado:</span>
-                          <span className="font-medium text-primary">{item.cost}</span>
+                          <span className="text-hierarchy-secondary">Custo Acumulado:</span>
+                          <span className="font-semibold text-primary">{item.cost}</span>
                         </div>
                       </div>
                     </div>
@@ -121,22 +121,22 @@ export function FunnelChart() {
 
               {/* Indicador de Taxa de Conversão */}
               {index < funnelData.length - 1 && funnelData[index + 1].nextConversion && (
-                <div className="flex items-center mt-2 mb-2">
-                  <div className="flex-1 h-px bg-border/30"></div>
-                  <div className="px-3 py-1 bg-primary/10 rounded-full text-xs font-medium text-primary">
+                <div className="flex items-center mt-4 mb-4">
+                  <div className="flex-1 h-px bg-border/50"></div>
+                  <div className="px-4 py-2 bg-primary/15 rounded-full text-xs font-semibold text-primary">
                     ↓ {funnelData[index + 1].nextConversion} conversão
                   </div>
-                  <div className="flex-1 h-px bg-border/30"></div>
+                  <div className="flex-1 h-px bg-border/50"></div>
                 </div>
               )}
             </div>
           ))}
         </div>
         
-        <div className="mt-6 pt-4 border-t border-border/30">
-          <div className="flex items-center justify-between text-xs text-muted-foreground/60">
+        <div className="mt-8 pt-6 border-t border-border/50">
+          <div className="flex items-center justify-between text-sm text-hierarchy-secondary">
             <span>Total de Conversões</span>
-            <span className="font-semibold">173 leads gerados</span>
+            <span className="font-semibold text-primary">173 leads gerados</span>
           </div>
         </div>
       </CardContent>

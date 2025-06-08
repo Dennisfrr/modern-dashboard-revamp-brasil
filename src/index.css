@@ -3,55 +3,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Importar fontes modernas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
   :root {
-    --background: 210 11% 15%;
-    --foreground: 0 0% 98%;
+    /* Cores de fundo mais suaves */
+    --background: 210 11% 7%;
+    --foreground: 0 0% 95%;
 
-    --card: 210 11% 18%;
-    --card-foreground: 0 0% 98%;
+    /* Cards com separação sutil */
+    --card: 210 11% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 210 11% 18%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 210 11% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 14 100% 57%;
+    /* Laranja vibrante para elementos principais */
+    --primary: 20 100% 60%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 210 11% 21%;
-    --secondary-foreground: 0 0% 98%;
+    /* Tons de cinza para hierarquia */
+    --secondary: 210 11% 15%;
+    --secondary-foreground: 0 0% 88%;
 
-    --muted: 210 11% 21%;
+    --muted: 210 11% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 14 100% 57%;
+    --accent: 20 100% 60%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 210 11% 25%;
-    --input: 210 11% 25%;
-    --ring: 14 100% 57%;
+    /* Bordas mais sutis */
+    --border: 210 11% 18%;
+    --input: 210 11% 18%;
+    --ring: 20 100% 60%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 210 11% 12%;
+    --sidebar-background: 210 11% 5%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 14 100% 57%;
+    --sidebar-primary: 20 100% 60%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 210 11% 18%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 210 11% 20%;
-    --sidebar-ring: 14 100% 57%;
+    --sidebar-accent: 210 11% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 210 11% 15%;
+    --sidebar-ring: 20 100% 60%;
 
-    /* Custom dashboard colors */
-    --chart-1: 14 100% 57%;
-    --chart-2: 14 100% 47%;
-    --chart-3: 14 100% 37%;
+    /* Cores para gráficos */
+    --chart-1: 20 100% 60%;
+    --chart-2: 190 100% 65%;
+    --chart-3: 20 100% 50%;
     --chart-4: 0 100% 65%;
-    --chart-5: 20 100% 65%;
+    --chart-5: 35 100% 65%;
+
+    /* Cores semânticas */
+    --success: 142 76% 36%;
+    --warning: 45 93% 47%;
+    --error: 0 84% 60%;
   }
 }
 
@@ -62,15 +75,79 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
   }
 }
 
 @layer utilities {
   .gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(14 100% 47%) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(20 100% 50%) 100%);
   }
   
   .gradient-card {
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(210 11% 20%) 100%);
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(210 11% 12%) 100%);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   }
+
+  .gradient-subtle {
+    background: radial-gradient(ellipse at top, hsl(210 11% 8%) 0%, hsl(var(--background)) 100%);
+  }
+
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .text-hierarchy-primary {
+    @apply text-foreground font-semibold;
+  }
+
+  .text-hierarchy-secondary {
+    @apply text-muted-foreground/80 font-medium;
+  }
+
+  .text-hierarchy-tertiary {
+    @apply text-muted-foreground/60 font-normal;
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold text-foreground leading-none;
+  }
+
+  .metric-label {
+    @apply text-sm font-medium text-hierarchy-secondary;
+  }
+
+  .metric-subtitle {
+    @apply text-xs text-hierarchy-tertiary;
+  }
+}
+
+/* Skeleton loading animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted)/0.5) 50%, hsl(var(--muted)) 75%);
+  background-size: 200px 100%;
+  animation: skeleton-loading 1.5s infinite;
 }
