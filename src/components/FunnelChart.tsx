@@ -21,23 +21,29 @@ export function FunnelChart() {
         </CardTitle>
         <p className="text-sm text-muted-foreground">Tipo Mensagens</p>
       </CardHeader>
-      <CardContent className="space-y-2">
-        {funnelData.map((item, index) => (
-          <div key={index} className="flex items-center justify-between">
-            <div 
-              className="gradient-primary text-center py-2 px-4 rounded text-white font-medium text-sm"
-              style={{ width: `${item.percentage}%`, minWidth: '60px' }}
-            >
-              {item.label}
+      <CardContent className="space-y-4">
+        <div className="grid grid-cols-1 gap-3">
+          {funnelData.map((item, index) => (
+            <div key={index} className="grid grid-cols-3 items-center gap-4">
+              <div 
+                className="gradient-primary text-center py-3 px-4 rounded text-white font-medium text-sm flex items-center justify-center"
+                style={{ 
+                  width: `${Math.max(item.percentage, 20)}%`,
+                  minWidth: '80px',
+                  marginLeft: `${(100 - Math.max(item.percentage, 20)) / 2}%`
+                }}
+              >
+                {item.label}
+              </div>
+              <div className="text-sm text-muted-foreground text-center">
+                {index === 0 ? 'R$ 9,53' : index === 1 ? '65,20%' : '0,00%'}
+              </div>
+              <div className="text-sm text-foreground text-center">
+                {index === 0 ? 'R$ 1,30' : index === 1 ? 'R$ 2,74' : 'R$ 0,00'}
+              </div>
             </div>
-            <div className="text-sm text-muted-foreground ml-4">
-              {index === 0 ? 'R$ 9,53' : index === 1 ? '65,20%' : '0,00%'}
-            </div>
-            <div className="text-sm text-foreground">
-              {index === 0 ? 'R$ 1,30' : index === 1 ? 'R$ 2,74' : 'R$ 0,00'}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
   )
